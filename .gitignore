@@ -1,6 +1,6 @@
 /target/**
-/project/target/**
-/project/project/**
+**/target/**
+**/project/**
 
 .cache-main
 .cache-tests
