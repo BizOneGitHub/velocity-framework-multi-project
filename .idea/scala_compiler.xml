@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="sbt 1" modules="core,sbt-multi-independent-project-core,sbt-multi-independent-project-master,sbt-multi-independent-project-master_8187,sbt-multi-independent-project-submodule,submodule,velocity-framework" />
+  </component>
+</project>
