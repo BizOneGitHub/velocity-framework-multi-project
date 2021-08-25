@@ -1,7 +1,5 @@
 import Common._
 
-lazy val core = projectModule("connection")
-
-lazy val submodule = projectModule("transform-data")
-  .dependsOn(core)
-
+lazy val vfconnect = projectModule("connection")
+lazy val vftransformation = projectModule("transformation").dependsOn(vfconnect)
+lazy val vfframeworktest = projectModule("framework-test").dependsOn(vftransformation)

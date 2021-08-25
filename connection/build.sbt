@@ -1,13 +1,13 @@
 import Common._
 import Dependencies._
 
-name := "velocity-framework-connection"
+name := "velocity-connection"
 version := "0.0.2-SNAPSHOT"
 
 libraryDependencies ++= Seq(
-  "com.typesafe" % "config" % "1.4.1"
+  "com.typesafe" % "config" % "1.3.1"
 ) ++ testDependencies
 
 //independent project
-lazy val jobTransformation: Project =
+lazy val connection: Project =
   if (sys.props.get("independent").isDefined) (project in file(".")).settings(buildSettings) else null

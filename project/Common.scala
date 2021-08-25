@@ -5,7 +5,7 @@ object Common {
 
   lazy val buildSettings = Seq(
     organization := "com.velocity",
-    scalaVersion := "2.12.10"
+    scalaVersion := "2.12.14"
   )
 
   def projectModule(name: String): Project =
