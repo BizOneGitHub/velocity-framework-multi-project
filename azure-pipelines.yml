@@ -9,21 +9,20 @@ trigger:
 variables:
   - name: vmImage
     value: 'ubuntu-latest'
-
-stages:
-  - stage: ProdStage
-    displayName: Deploy Prod Stage
-    dependsOn: UATStage
-    condition: succeeded('UATStage')
-    jobs:
-      - deployment: DeploymentPRODJob
-        pool:
-          vmImage: $(vmImage)
-        variables:
-          - template: deploy/var-deploy-prod.yml
-        environment: DEV1
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - template: deploy/deploy-prod.yml
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+  - checkout: self
+    persistCredentials: true
+  - powershell: |
+      $destinationFolder = $HOME+"\.sbt"
+      if (!(Test-Path -path $destinationFolder)) {New-Item $destinationFolder -Type Directory}
+      New-Item $HOME/.sbt/.credentials -ItemType file
+      Add-Content  $HOME/.sbt/.credentials "`nrealm="
+      Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
+      Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
+      Add-Content  $HOME/.sbt/.credentials "`npassword=jui7qhnuyl5nnjnvbxd2mnbgp6lytfud375uabgwdizdqt4dfg5a"
+  - script: sbt clean
+    displayName: 'Running $ sbt clean'
+  - script: sbt assembly publish
+    displayName: 'Run $ sbt assembly publish'
