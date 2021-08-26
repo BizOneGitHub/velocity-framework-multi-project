@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+#
+trigger:
+  - main
+
+variables:
+  - name: vmImage
+    value: 'ubuntu-latest'
+
+stages:
+  - stage: ProdStage
+    displayName: Deploy Prod Stage
+    dependsOn: UATStage
+    condition: succeeded('UATStage')
+    jobs:
+      - deployment: DeploymentPRODJob
+        pool:
+          vmImage: $(vmImage)
+        variables:
+          - template: deploy/var-deploy-prod.yml
+        environment: PROD1
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/deploy-prod.yml

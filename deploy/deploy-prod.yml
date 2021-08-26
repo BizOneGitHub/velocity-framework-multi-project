@@ -1,0 +1,20 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+steps:
+- checkout: self
+  persistCredentials: true
+- powershell: |
+    $destinationFolder = $HOME+"\.sbt"
+    if (!(Test-Path -path $destinationFolder)) {New-Item $destinationFolder -Type Directory}
+    New-Item $HOME/.sbt/.credentials -ItemType file
+    Add-Content  $HOME/.sbt/.credentials "`nrealm="
+    Add-Content  $HOME/.sbt/.credentials "`nhost=$(host)"
+    Add-Content  $HOME/.sbt/.credentials "`nuser=$(user)"
+    Add-Content  $HOME/.sbt/.credentials "`npassword=$(password)"
+- script: sbt clean
+  displayName: 'Running $ sbt clean''
+- script: sbt assembly publish
+  displayName: 'Run $ sbt coverageOff dev:assembly publish'
