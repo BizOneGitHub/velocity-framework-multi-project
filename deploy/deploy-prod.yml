@@ -17,4 +17,4 @@ steps:
 - script: sbt clean
   displayName: 'Running $ sbt clean'
 - script: sbt assembly publish
-  displayName: 'Run $ sbt coverageOff dev:assembly publish'
+  displayName: 'Run $ sbt coverageOff assembly publish'
