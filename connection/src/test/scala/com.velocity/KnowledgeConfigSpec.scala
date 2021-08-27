@@ -1,6 +1,6 @@
 package com.velocity
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.{ FlatSpec, Matchers }
 
 class KnowledgeConfigSpec extends FlatSpec with Matchers with KnowledgeConfig {
 

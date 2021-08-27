@@ -25,4 +25,4 @@ steps:
   - script: sbt clean
     displayName: 'Running $ sbt clean'
   - script: sbt assembly publish
-    displayName: 'Run $ sbt assembly publish'
+    displayName: 'Run $ sbt assembly'

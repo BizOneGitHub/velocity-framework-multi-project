@@ -48,3 +48,7 @@ Script #1 links and unlinks 'top' project files, as well as runs sbt by passing 
 
 ## Gotchas
 * `top-project-linker.sh` script expects Common.scala + Dependencies.scala, change these if your project is different and add if you need more files to be linked (hard coded, but good enough).
+
+Format current file
+Opt + Cmd + L (macOS)
+Ctrl + Alt + L (other)
