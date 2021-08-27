@@ -3,15 +3,13 @@ import Common._
 lazy val velocity = project
   .in(file("."))
   .aggregate(vfconnect, vftransformation, vfframeworktest)
-  .settings(
-    update / aggregate := false
-  )
+
 
 lazy val vfconnect = projectModule("connection")
 
 lazy val vftransformation = projectModule("transformation").dependsOn(vfconnect)
 
-lazy val vfframeworktest = projectModule("framework-test").dependsOn(vftransformation)
+lazy val vfframeworktest = projectModule("frameworktest").dependsOn(vftransformation)
 
 
 credentials += Credentials(Path.userHome / ".sbt" / ".credentials")

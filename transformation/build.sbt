@@ -1,8 +1,7 @@
- import Common._
+import Common._
 import Dependencies._
 
 name := "velocity-transformation"
-version := "0.0.2-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.9.9"
@@ -10,16 +9,11 @@ libraryDependencies ++= Seq(
 
 //independent project
 
-lazy val transformation: Project = {
-  if (sys.props.get("independent").isDefined) (project in file(".")).settings(buildSettings) else null
-}
-
- //independent 'project' specific dependencies (pre-released)
+//independent 'project' specific dependencies (pre-released)
 
 libraryDependencies ++= {
-    Seq(
-//    "com.velocity" %% "velocity-connection" % "0.0.1"
+  Seq(
+    "com.velocity" %% "velocity-connection" % s"${_version}"
   )
 
 }
-
