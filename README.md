@@ -1,6 +1,5 @@
 # SBT multi level project (with independent sub-module build)
-[![Build Status](https://travis-ci.org/hugemane/sbt-multi-independent-project.svg?branch=master)](https://travis-ci.org/hugemane/sbt-multi-independent-project)
-
+[![Build Status](https://dev.azure.com/BizOneDev/Demo/_apis/build/status/BizOneGitHub.velocity-framework-multi-project?branchName=main)](https://dev.azure.com/BizOneDev/Demo/_build/latest?definitionId=55&branchName=main)
 It would be nice to have one's cake and eat it.
 
 ## Motivation
@@ -30,28 +29,12 @@ At the sub-module level, it's probable that this would be deployed independently
 
 Script #1 links and unlinks 'top' project files, as well as runs sbt by passing `-Dindependent=true` arg to sbt.
 
-## Setup
-1. Copy bash script in source `bash/top-project-linker.sh` somewhere.
-2. alias script as sbt-tpl e.g. `alias sbt-tpl="../path/to/top-project-linker.sh"`.
-3. In the sub-module ensure project has common settings see `core` + `submodule` build.sbt files.
-4. If the sub-module needs dependencies, append these to `libraryDependencies` see submodule build.sbt file.
-
 ## Usage
-#### Top (normal) build
-1. Change to 'top' most project dir.
-2. Use `sbt` as usual.
-
-#### Independent sub-module build 
-1. change dir to a sub-module.
-2. run script via alias `sbt-tpl`.
-3. do whatever you need via sbt (when you're done, exit #2 script will clean up).
-
-## Gotchas
-* `top-project-linker.sh` script expects Common.scala + Dependencies.scala, change these if your project is different and add if you need more files to be linked (hard coded, but good enough).
 
 Format current file
 - `Opt + Cmd + L (macOS)`
 - `Ctrl + Alt + L (other)`
-
+- 
+#### Independent sub-module build
 You can run a task in another project by explicitly specifying the project ID, such as subProjectID/compile
-- `sbt connection/assembly connection/publishM2`
+- `sbt connection/assembly connection/publish`
