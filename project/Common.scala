@@ -53,6 +53,7 @@ object Common {
 //      else
 //        Some(MavenCache("local-maven", file(Path.userHome.absolutePath + "/.m2/repository")))
 //    },
+    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),`.`
     publishTo := {
       if (isSnapshot.value)
         Some(

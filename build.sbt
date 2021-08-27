@@ -24,7 +24,7 @@ lazy val vfframeworktest = projectModule("framework-test")
   .disablePlugins(AssemblyPlugin)
   .dependsOn(vftransformation)
 
-credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
+
 
 releaseIgnoreUntrackedFiles := true
 
