@@ -17,11 +17,10 @@ object Common {
     if(name.contains("test") || name.contains("connection")){
         Project(id = name, base = file(name))
           .settings(buildSettings, settings)
-          .settings(publish / skip := true)
           .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
     }else{
       Project(id = name, base = file(name))
-        .settings(buildSettings, settings, assemblySettings)
+        .settings(buildSettings, settings, assemblySettings, publishSbtPlugin)
         .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
     }
 
@@ -46,28 +45,27 @@ object Common {
     scalacOptions ++= compilerOptions,
     fork := true,
     javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
-    publishMavenStyle := true,
 //    publishTo := {
 //      if (isSnapshot.value)
 //        Some(MavenCache("Sonatype OSS Snapshots", file(Path.userHome.absolutePath + "/.m2/repository/snapshots")))
 //      else
 //        Some(MavenCache("local-maven", file(Path.userHome.absolutePath + "/.m2/repository")))
 //    },
-    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+
+  )
+  lazy val noPublishing = Seq(
+    publish := (),
+    publishLocal := ()
+  )
+  lazy val publishSbtPlugin = Seq(
+    publishMavenStyle := true,
+    publishArtifact in Test := false,
     publishTo := {
-      if (isSnapshot.value)
-        Some(
-          "snapshots".at(
-            "https://bizonedev.pkgs.visualstudio.com/Demo/_packaging/maven_evaluation/maven/v1/snapshots"
-          )
-        )
-      else
-        Some(
-          "release".at(
-            "https://bizonedev.pkgs.visualstudio.com/Demo/_packaging/maven_sbt_demo/maven/v1/"
-          )
-        )
-    }
+      val myrepo = "https://bizonedev.pkgs.visualstudio.com/Demo/_packaging/maven_sbt_demo/maven/v1/"
+      if (isSnapshot.value) Some("The Realm" at myrepo + "snapshots")
+      else Some("The Realm" at myrepo + "releases")
+    },
+    credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
   )
 
   lazy val assemblySettings = Seq(

@@ -5,7 +5,8 @@ ThisBuild / organization := "com.velocity"
 
 lazy val velocity = project
   .in(file("."))
-  .settings(settings)
+  .settings(settings: _*)
+  .settings(noPublishing: _*)
   .disablePlugins(AssemblyPlugin)
   .aggregate(vfconnect, vftransformation, vfframeworktest)
   .settings(
@@ -16,11 +17,11 @@ lazy val velocity = project
   )
 
 
-lazy val vfconnect = projectModule("connection")
+lazy val vfconnect = projectModule("connection").settings(noPublishing: _*)
 
 lazy val vftransformation = projectModule("transformation").dependsOn(vfconnect)
 
-lazy val vfframeworktest = projectModule("framework-test")
+lazy val vfframeworktest = projectModule("framework-test").settings(noPublishing: _*)
   .disablePlugins(AssemblyPlugin)
   .dependsOn(vftransformation)
 
