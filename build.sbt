@@ -1,8 +1,15 @@
 import Common._
 
+
 lazy val velocity = project
   .in(file("."))
   .aggregate(vfconnect, vftransformation, vfframeworktest)
+  .settings(
+    // crossScalaVersions must be set to Nil on the aggregating project
+    crossScalaVersions := Nil,
+    crossPaths := false,
+    publish / skip := false
+  )
 
 
 lazy val vfconnect = projectModule("connection")

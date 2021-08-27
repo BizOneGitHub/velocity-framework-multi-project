@@ -7,21 +7,26 @@ import wartremover.Wart
 import wartremover.WartRemover.autoImport._
 
 object Common{
-  val _version = "0.0.2"
+  lazy val scala212 = "2.12.14"
+  lazy val scala211 = "2.11.12"
+  lazy val _version = "0.0.3"
+  lazy val supportedScalaVersions = List(scala212, scala211)
+
   lazy val buildSettings = Seq(
     organization := "com.velocity",
-    scalaVersion := "2.12.14",
+    scalaVersion := scala212,
     version := _version
   )
 
   def projectModule(name: String): Project =
     Project(id = name, base = file(name)).settings(buildSettings, commonSettings, assemblySettings)
 
-
-
   lazy val commonSettings = Seq(
-//    crossPaths := false,
+    // set to exactly one Scala version
+    crossScalaVersions := supportedScalaVersions,
+    crossPaths := false,
 //    autoScalaLibrary := false,
+
     Compile / packageBin  := baseDirectory.value / "target" / s"${name.value}-${version.value}.jar",
     scalacOptions ++= compilerOptions
   )
