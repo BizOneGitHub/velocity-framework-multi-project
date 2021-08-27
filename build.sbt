@@ -51,3 +51,5 @@ releaseProcess := Seq[ReleaseStep](
   //  commitNextVersion,
   pushChanges
 )
+
+autoCompilerPlugins := true

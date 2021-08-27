@@ -7,4 +7,5 @@ object Main extends App {
   val result = KnowledgeProcessor().processKnowledgeInTime()
 
   println("Attained knowledge from:" + result)
+
 }
