@@ -13,13 +13,21 @@ object Common {
     scalaVersion := scala212
   )
 
-  def projectModule(name: String): Project =
-    Project(id = name, base = file(name))
-      .settings(buildSettings, settings)
-      .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
+  def projectModule(name: String): Project = {
+    if(name.contains("test")){
+        Project(id = name, base = file(name))
+        .settings(buildSettings)
+        .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
+    }else{
+      Project(id = name, base = file(name))
+        .settings(buildSettings, settings)
+        .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
+    }
+
+  }
 
   lazy val settings =
-      commonSettings ++
+    commonSettings ++
       assemblySettings
 
   lazy val commonSettings = Seq(
@@ -36,7 +44,6 @@ object Common {
     // disable publishing the main sources jar
     Compile / packageSrc / publishArtifact := false,
     scalacOptions ++= compilerOptions,
-    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
     publishTo := {
       if (isSnapshot.value)
         Some(
