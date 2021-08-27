@@ -1,15 +1,11 @@
-import com.lucidchart.sbt.scalafmt.ScalafmtCorePlugin.autoImport._
 import sbt.Keys._
 import sbt._
 import sbtassembly.AssemblyKeys._
 import sbtassembly._
-import wartremover.Wart
-import wartremover.WartRemover.autoImport._
-
 object Common{
   lazy val scala212 = "2.12.14"
   lazy val scala211 = "2.11.12"
-  lazy val _version = "0.0.3"
+  lazy val _version = "$releaseVersion"
   lazy val supportedScalaVersions = List(scala212, scala211)
 
   lazy val buildSettings = Seq(
@@ -25,7 +21,6 @@ object Common{
     // set to exactly one Scala version
     crossScalaVersions := supportedScalaVersions,
     crossPaths := false,
-//    autoScalaLibrary := false,
 
     Compile / packageBin  := baseDirectory.value / "target" / s"${name.value}-${version.value}.jar",
     scalacOptions ++= compilerOptions
