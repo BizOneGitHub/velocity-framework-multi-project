@@ -1,6 +1,7 @@
 import Common._
 import sbtrelease.ReleaseStateTransformations._
 
+ThisBuild / organization := "com.velocity"
 
 lazy val velocity = project
   .in(file("."))
@@ -9,7 +10,7 @@ lazy val velocity = project
     // crossScalaVersions must be set to Nil on the aggregating project
     crossScalaVersions := Nil,
     crossPaths := false,
-    publish / skip := false
+    publish / skip := false,
   )
 
 

@@ -19,7 +19,7 @@ object Common {
       .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
 
   lazy val setting =
-    commonSettings ++
+      commonSettings ++
       assemblySettings
 
   lazy val commonSettings = Seq(
@@ -27,6 +27,14 @@ object Common {
     crossScalaVersions := supportedScalaVersions,
     crossPaths := false,
     Compile / packageBin := baseDirectory.value / "target" / s"${name.value}-${version.value}.jar",
+    // disable publishing the main jar produced by `package`
+    //    Compile / packageBin / publishArtifact := false,
+
+    // disable publishing the main API jar
+    Compile / packageDoc / publishArtifact := false,
+
+    // disable publishing the main sources jar
+    Compile / packageSrc / publishArtifact := false,
     scalacOptions ++= compilerOptions
   )
 
