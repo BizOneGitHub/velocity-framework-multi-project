@@ -1,5 +1,5 @@
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
-import sbt.Keys.{publishTo, _}
+import sbt.Keys.{fork, publishMavenStyle, publishTo, _}
 import sbt._
 import sbtassembly.AssemblyKeys._
 import sbtassembly._
@@ -14,21 +14,21 @@ object Common {
   )
 
   def projectModule(name: String): Project = {
-    if(name.contains("test")){
+    if(name.contains("test") || name.contains("connection")){
         Project(id = name, base = file(name))
-        .settings(buildSettings)
-        .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
+          .settings(buildSettings, settings)
+          .settings(publish / skip := true)
+          .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
     }else{
       Project(id = name, base = file(name))
-        .settings(buildSettings, settings)
+        .settings(buildSettings, settings, assemblySettings)
         .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
     }
 
   }
 
   lazy val settings =
-    commonSettings ++
-      assemblySettings
+    commonSettings
 
   lazy val commonSettings = Seq(
     // set to exactly one Scala version
@@ -44,6 +44,15 @@ object Common {
     // disable publishing the main sources jar
     Compile / packageSrc / publishArtifact := false,
     scalacOptions ++= compilerOptions,
+    fork := true,
+    javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
+    publishMavenStyle := true,
+//    publishTo := {
+//      if (isSnapshot.value)
+//        Some(MavenCache("Sonatype OSS Snapshots", file(Path.userHome.absolutePath + "/.m2/repository/snapshots")))
+//      else
+//        Some(MavenCache("local-maven", file(Path.userHome.absolutePath + "/.m2/repository")))
+//    },
     publishTo := {
       if (isSnapshot.value)
         Some(
