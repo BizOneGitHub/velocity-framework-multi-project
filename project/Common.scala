@@ -1,5 +1,5 @@
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
-import sbt.Keys._
+import sbt.Keys.{publishTo, _}
 import sbt._
 import sbtassembly.AssemblyKeys._
 import sbtassembly._
@@ -35,7 +35,22 @@ object Common {
 
     // disable publishing the main sources jar
     Compile / packageSrc / publishArtifact := false,
-    scalacOptions ++= compilerOptions
+    scalacOptions ++= compilerOptions,
+    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+    publishTo := {
+      if (isSnapshot.value)
+        Some(
+          "snapshots".at(
+            "https://bizonedev.pkgs.visualstudio.com/Demo/_packaging/maven_evaluation/maven/v1/snapshots"
+          )
+        )
+      else
+        Some(
+          "release".at(
+            "https://bizonedev.pkgs.visualstudio.com/Demo/_packaging/maven_sbt_demo/maven/v1/"
+          )
+        )
+    }
   )
 
   lazy val assemblySettings = Seq(
