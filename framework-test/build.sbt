@@ -14,6 +14,6 @@ lazy val submodule: Project =
 //independent 'project' specific dependencies (pre-released)
 libraryDependencies ++= {
   if (sys.props.get("independent").isDefined) Seq(
-    "com.velocity" %% "velocity-transformation" % s"${_version}"
+    "com.velocity" %% "velocity-transformation" % s"${version}"
   ) else Seq()
 }

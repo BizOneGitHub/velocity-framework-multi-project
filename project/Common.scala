@@ -5,13 +5,11 @@ import sbtassembly._
 object Common{
   lazy val scala212 = "2.12.14"
   lazy val scala211 = "2.11.12"
-  lazy val _version = "$releaseVersion"
   lazy val supportedScalaVersions = List(scala212, scala211)
 
   lazy val buildSettings = Seq(
     organization := "com.velocity",
     scalaVersion := scala212,
-    version := _version
   )
 
   def projectModule(name: String): Project =
