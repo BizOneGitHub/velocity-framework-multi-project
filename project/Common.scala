@@ -14,7 +14,7 @@ object Common {
   )
 
   def projectModule(name: String): Project = {
-    if(name.contains("test") || name.contains("connection")){
+    if(name.contains("test")){
         Project(id = name, base = file(name))
           .settings(buildSettings, settings)
           .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
