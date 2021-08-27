@@ -15,10 +15,10 @@ object Common {
 
   def projectModule(name: String): Project =
     Project(id = name, base = file(name))
-      .settings(buildSettings, setting)
+      .settings(buildSettings, settings)
       .settings(addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17"): _*)
 
-  lazy val setting =
+  lazy val settings =
       commonSettings ++
       assemblySettings
 
