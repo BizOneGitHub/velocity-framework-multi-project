@@ -21,7 +21,7 @@ steps:
       Add-Content  $HOME/.sbt/.credentials "`nrealm="
       Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
       Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
-      Add-Content  $HOME/.sbt/.credentials "`npassword=jui7qhnuyl5nnjnvbxd2mnbgp6lytfud375uabgwdizdqt4dfg5a"
+      Add-Content  $HOME/.sbt/.credentials "`npassword=jbxf3ovqcflejuvjos6sccrp6xd5vgylepb4jlvpirgida6pkemq"
   - script: sbt clean
     displayName: 'Running $ sbt clean'
   - script: sbt assembly publish
