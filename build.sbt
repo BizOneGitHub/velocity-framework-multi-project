@@ -9,7 +9,7 @@ lazy val vfconnect = projectModule("connection")
 
 lazy val vftransformation = projectModule("transformation").dependsOn(vfconnect)
 
-lazy val vfframeworktest = projectModule("frameworktest").dependsOn(vftransformation)
+lazy val vfframeworktest = projectModule("framework-test").dependsOn(vftransformation)
 
 
 credentials += Credentials(Path.userHome / ".sbt" / ".credentials")

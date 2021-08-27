@@ -7,13 +7,14 @@ libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.9.9"
 ) ++ testDependencies
 
-//independent project
+////independent project
+lazy val submodule: Project =
+  if (sys.props.get("independent").isDefined) (project in file(".")).settings(buildSettings, commonSettings,
+    assemblySettings) else null
 
 //independent 'project' specific dependencies (pre-released)
-
 libraryDependencies ++= {
-  Seq(
+  if (sys.props.get("independent").isDefined) Seq(
     "com.velocity" %% "velocity-connection" % s"${_version}"
-  )
-
+  ) else Seq()
 }

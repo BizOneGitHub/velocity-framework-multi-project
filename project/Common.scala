@@ -15,8 +15,7 @@ object Common{
   )
 
   def projectModule(name: String): Project =
-    Project(id = name, base = file(name)).settings(buildSettings, commonSettings,
-      assemblySettings)
+    Project(id = name, base = file(name)).settings(buildSettings, commonSettings, assemblySettings)
 
 
 
