@@ -62,8 +62,8 @@ object Common {
     publishArtifact in Test := false,
     publishTo := {
       val myrepo = "https://bizonedev.pkgs.visualstudio.com/Demo/_packaging/maven_sbt_demo/maven/v1/"
-      if (isSnapshot.value) Some("The Realm" at myrepo + "snapshots")
-      else Some("The Realm" at myrepo + "releases")
+      if (isSnapshot.value) Some("snapshots".at(myrepo + "snapshots"))
+      else Some("release".at(myrepo))
     },
     credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
   )
