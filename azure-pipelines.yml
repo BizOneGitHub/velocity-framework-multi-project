@@ -11,9 +11,16 @@ variables:
     value: 'ubuntu-latest'
 pool:
   vmImage: 'ubuntu-latest'
+
 steps:
   - checkout: self
     persistCredentials: true
+  - task: AzureKeyVault@2
+    inputs:
+      azureSubscription: Microsoft Azure Sponsorship 2021 (5f64f1ab-42b5-4fee-93ca-918ef6018d0c)
+      KeyVaultName: 'kv-quan-evaluation'
+      SecretsFilter: '*'
+      RunAsPreJob: false
   - powershell: |
       $destinationFolder = $HOME+"\.sbt"
       if (!(Test-Path -path $destinationFolder)) {New-Item $destinationFolder -Type Directory}
@@ -21,8 +28,11 @@ steps:
       Add-Content  $HOME/.sbt/.credentials "`nrealm="
       Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
       Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
-      Add-Content  $HOME/.sbt/.credentials "`npassword=jbxf3ovqcflejuvjos6sccrp6xd5vgylepb4jlvpirgida6pkemq"
+      Add-Content  $HOME/.sbt/.credentials "`npassword=$artifacts-pw"
   - script: sbt clean
     displayName: 'Running $ sbt clean'
   - script: sbt transformation/assembly transformation/publish
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
+
+
+  q3equfz4igv6fajlod2lphysuklcj2erkznyousr7xjndgyc6yza
