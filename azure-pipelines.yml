@@ -22,6 +22,7 @@ steps:
       SecretsFilter: '*'
       RunAsPreJob: false
   - powershell: |
+      echo '$(artifacts-pw)'
       $destinationFolder = $HOME+"\.sbt"
       if (!(Test-Path -path $destinationFolder)) {New-Item $destinationFolder -Type Directory}
       New-Item $HOME/.sbt/.credentials -ItemType file
