@@ -28,7 +28,7 @@ steps:
       Add-Content  $HOME/.sbt/.credentials "`nrealm="
       Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
       Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
-      Add-Content  $HOME/.sbt/.credentials "`npassword=artifacts-pw"
+      Add-Content  $HOME/.sbt/.credentials "`n$(artifacts-pw)"
   - task: qetza.replacetokens.replacetokens-task.replacetokens@4
     displayName: 'Replace tokens in .sbt/.credentials'
     inputs:
