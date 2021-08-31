@@ -18,7 +18,7 @@ steps:
   - task: AzureKeyVault@2
     inputs:
       azureSubscription: Microsoft Azure Sponsorship 2021 (5f64f1ab-42b5-4fee-93ca-918ef6018d0c)
-      KeyVaultName: 'kv-quan-evaluation'
+      KeyVaultName: 'kv-iot-devops-evaluate'
       SecretsFilter: '*'
       RunAsPreJob: false
   - powershell: |
