@@ -30,7 +30,7 @@ steps:
       Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
       Add-Content  $HOME/.sbt/.credentials $(artifacts-pw)
 #  - task: qetza.replacetokens.replacetokens-task.replacetokens@4
-#    displayName: 'Replace tokens in .sbt/.credentials'
+#    displayName: 'Replace token in .sbt/.credentials'
 #    inputs:
 #      targetFiles: '/home/vsts/.sbt/.credentials'
   - script: sbt clean
