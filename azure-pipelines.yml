@@ -2,7 +2,7 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-#
+# q3equfz4igv6fajlod2lphysuklcj2erkznyousr7xjndgyc6yza
 trigger:
   - main
 
@@ -22,14 +22,13 @@ steps:
       SecretsFilter: '*'
       RunAsPreJob: false
   - powershell: |
-      echo $artifacts-pw
       $destinationFolder = $HOME+"\.sbt"
       if (!(Test-Path -path $destinationFolder)) {New-Item $destinationFolder -Type Directory}
       New-Item $HOME/.sbt/.credentials -ItemType file
       Add-Content  $HOME/.sbt/.credentials "`nrealm="
       Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
       Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
-      Add-Content  $HOME/.sbt/.credentials "`npassword=$artifacts-pw"
+      Add-Content  $HOME/.sbt/.credentials "`npassword=q3equfz4igv6fajlod2lphysuklcj2erkznyousr7xjndgyc6yza"
   - script: sbt clean
     displayName: 'Running $ sbt clean'
   - script: sbt transformation/assembly transformation/publish
