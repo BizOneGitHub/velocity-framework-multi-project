@@ -18,7 +18,7 @@ steps:
   - task: AzureKeyVault@2
     inputs:
       azureSubscription: Microsoft Azure Sponsorship 2021 (5f64f1ab-42b5-4fee-93ca-918ef6018d0c)
-      KeyVaultName: 'kv-quan-evaluation'
+      KeyVaultName: 'kv-iot-devops-evaluate'
       SecretsFilter: '*'
       RunAsPreJob: false
   - powershell: |
@@ -28,11 +28,7 @@ steps:
       Add-Content  $HOME/.sbt/.credentials "`nrealm="
       Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
       Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
-      Add-Content  $HOME/.sbt/.credentials $(artifacts-pw)
-#  - task: qetza.replacetokens.replacetokens-task.replacetokens@4
-#    displayName: 'Replace token in .sbt/.credentials'
-#    inputs:
-#      targetFiles: '/home/vsts/.sbt/.credentials'
+      Add-Content  $HOME/.sbt/.credentials "`npassword=$(artifacts-pw)"
   - script: sbt clean
     displayName: 'Running $ sbt clean'
   - script: sbt transformation/assembly transformation/publish
