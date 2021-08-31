@@ -22,6 +22,7 @@ steps:
       SecretsFilter: '*'
       RunAsPreJob: false
   - powershell: |
+      echo $artifacts-pw
       $destinationFolder = $HOME+"\.sbt"
       if (!(Test-Path -path $destinationFolder)) {New-Item $destinationFolder -Type Directory}
       New-Item $HOME/.sbt/.credentials -ItemType file
@@ -33,6 +34,3 @@ steps:
     displayName: 'Running $ sbt clean'
   - script: sbt transformation/assembly transformation/publish
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
-
-
-  q3equfz4igv6fajlod2lphysuklcj2erkznyousr7xjndgyc6yza
