@@ -18,7 +18,7 @@ steps:
   - task: AzureKeyVault@2
     inputs:
       azureSubscription: Microsoft Azure Sponsorship 2021 (5f64f1ab-42b5-4fee-93ca-918ef6018d0c)
-      KeyVaultName: 'kv-iot-devops-evaluate'
+      KeyVaultName: 'kv-quan-evaluation'
       SecretsFilter: '*'
       RunAsPreJob: false
   - powershell: |
@@ -28,7 +28,7 @@ steps:
       New-Item $HOME/.sbt/.credentials -ItemType file
       Add-Content  $HOME/.sbt/.credentials "`nrealm="
       Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
-      Add-Content  $HOME/.sbt/.credentials "`nuser=BizOneDev"
+      Add-Content  $HOME/.sbt/.credentials "`nuser=$(artifacts-user)"
       Add-Content  $HOME/.sbt/.credentials "`npassword=$(artifacts-pw)"
   - script: sbt clean
     displayName: 'Running $ sbt clean'
