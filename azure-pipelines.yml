@@ -9,19 +9,28 @@ trigger:
 variables:
   - name: vmImage
     value: 'ubuntu-latest'
+pool:
+  vmImage: 'ubuntu-latest'
 
-stages:
-  - stage: Validate
-    displayName: Release Stage
-    jobs:
-      - deployment: ValidateJob
-        pool:
-          vmImage: $(vmImage)
-        variables:
-          - template: variables/var-release.yml
-        environment: UT
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - template: jobs/validate.yml
+steps:
+  - checkout: self
+    persistCredentials: true
+  - task: AzureKeyVault@2
+    inputs:
+      azureSubscription: Microsoft Azure Sponsorship 2021 (5f64f1ab-42b5-4fee-93ca-918ef6018d0c)
+      KeyVaultName: 'kv-quan-evaluation'
+      SecretsFilter: '*'
+      RunAsPreJob: false
+  - powershell: |
+      echo '$(artifacts-pw)'
+      $destinationFolder = $HOME+"\.sbt"
+      if (!(Test-Path -path $destinationFolder)) {New-Item $destinationFolder -Type Directory}
+      New-Item $HOME/.sbt/.credentials -ItemType file
+      Add-Content  $HOME/.sbt/.credentials "`nrealm="
+      Add-Content  $HOME/.sbt/.credentials "`nhost=bizonedev.pkgs.visualstudio.com"
+      Add-Content  $HOME/.sbt/.credentials "`nuser=$(artifacts-user)"
+      Add-Content  $HOME/.sbt/.credentials "`npassword=$(artifacts-pw)"
+  - script: sbt clean
+    displayName: 'Running $ sbt clean'
+  - script: sbt transformation/assembly transformation/publish
+    displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
