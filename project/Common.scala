@@ -33,7 +33,7 @@ object Common {
     // set to exactly one Scala version
     crossScalaVersions := supportedScalaVersions,
     crossPaths := false,
-    Compile / packageBin := baseDirectory.value / "target" / s"${name.value}-${version.value}.jar",
+    //Compile / packageBin := baseDirectory.value / "target" / s"${name.value}-${version.value}.jar",
     // disable publishing the main jar produced by `package`
     //    Compile / packageBin / publishArtifact := false,
 
