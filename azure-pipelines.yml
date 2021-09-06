@@ -5,6 +5,9 @@
 # q3equfz4igv6fajlod2lphysuklcj2erkznyousr7xjndgyc6yza
 trigger:
   - main
+  - sit
+  - uat
+  - develop
 
 variables:
   - name: vmImage
@@ -18,10 +21,10 @@ stages:
         pool:
           vmImage: $(vmImage)
         variables:
-          - template: variables/var-release.yml
-        environment: UT
+          - template: deploy/variable/var-prod.yml
+        environment: UT1
         strategy:
           runOnce:
             deploy:
               steps:
-                - template: jobs/validate.yml
+                - template: deploy/job/deploy-prod.yml
