@@ -29,7 +29,6 @@ stages:
             deploy:
               steps:
                 - template: deploy/jobs/deploy-dev.yml
-
   - stage: SIT
       displayName: SIT Stage
       condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/sit'))
@@ -37,8 +36,6 @@ stages:
         - deployment: SITJob
           pool:
             vmImage: $(vmImage)
-          variables:
-            - template: deploy/variables/var-prod.yml
           environment: UT
           strategy:
             runOnce:
@@ -52,8 +49,6 @@ stages:
         - deployment: UATJob
           pool:
             vmImage: $(vmImage)
-          variables:
-            - template: deploy/variables/var-prod.yml
           environment: UAT
           strategy:
             runOnce:
