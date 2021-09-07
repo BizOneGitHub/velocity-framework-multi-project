@@ -22,7 +22,7 @@ stages:
         pool:
           vmImage: $(vmImage)
         variables:
-          - template: deploy/variable/var-prod.yml
+          - template: deploy/variables/var-prod.yml
         environment: UT1
         strategy:
           runOnce:
