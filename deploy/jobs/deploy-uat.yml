@@ -10,5 +10,14 @@ steps:
     displayName: 'Running $ sbt clean'
   - script: sbt coverage test coverageReport coverageOff
     displayName: 'Running framework-test $ sbt coverage test coverageReport coverageOff'
+  - task: Bash@3
+    displayName: 'set main branch'
+    inputs:
+      targetType: 'inline'
+      script: |
+        git config --global user.email "$(user.email)"
+        git config --global user.name "$(user.name)"
+        git checkout -b release/uat origin/release/uat
+        git push origin release/uat
   - script: sbt "release release-version $(release_version) with-defaults"
     displayName: 'Running $ sbt "release release-version $(release_version) with-defaults"'
