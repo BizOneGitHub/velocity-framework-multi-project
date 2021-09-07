@@ -20,3 +20,5 @@ steps:
         git checkout -b main origin/main
         git merge origin/release/uat
         git push origin main
+  - script: sbt test
+    displayName: 'Running $ sbt test'

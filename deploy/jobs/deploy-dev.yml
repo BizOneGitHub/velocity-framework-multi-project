@@ -28,7 +28,7 @@ steps:
   - script: sbt transformation/assembly
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
   - task: Bash@3
-    displayName: 'set release/sit'
+    displayName: 'Release source for release/sit'
     inputs:
       targetType: 'inline'
       script: |
@@ -37,3 +37,5 @@ steps:
         git checkout -b release/sit origin/release/sit
         git merge origin/develop
         git push origin release/sit
+  - script: sbt test
+    displayName: 'Running $ sbt test'
