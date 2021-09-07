@@ -16,7 +16,7 @@ variables:
 stages:
   - stage: DEV
     displayName: DEV Stage
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/develop'))
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
     jobs:
       - deployment: DEVJob
         pool:
