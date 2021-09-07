@@ -40,3 +40,4 @@ You can run a task in another project by explicitly specifying the project ID, s
 ### Build All Project
 - `sbt assembly publish`
 - `sbt coverage test coverageReport coverageOff`
+- `sbt "release release-version $(release_version) with-defaults"`
