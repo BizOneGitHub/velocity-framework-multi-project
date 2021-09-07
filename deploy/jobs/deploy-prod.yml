@@ -27,3 +27,12 @@ steps:
     displayName: 'Running framework-test $ sbt coverage test coverageReport coverageOff'
   - script: sbt transformation/assembly transformation/publish
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
+  - task: Bash@3
+    displayName: 'release source stable tags'
+    inputs:
+      targetType: 'inline'
+      script: |
+        git config --global user.email "$(user.email)"
+        git config --global user.name "$(user.name)"
+        git tags -a v$(release_version) -m 'release source stable tags $(release_version)'
+        git push --tags
