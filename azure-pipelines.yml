@@ -30,7 +30,7 @@ stages:
               steps:
                 - template: deploy/jobs/deploy-dev.yml
   - stage: SIT
-    displayName: SIT Stage
+    displayName: QC Stage
     condition: eq(variables['build.sourceBranch'], 'refs/heads/release/sit')
     jobs:
       - deployment: QCJob
@@ -43,7 +43,7 @@ stages:
               steps:
                 - template: deploy/jobs/deploy-sit.yml
   - stage: UAT
-    displayName: UAT Stage
+    displayName: PO Stage
     condition: eq(variables['build.sourceBranch'], 'refs/heads/release/uat')
     jobs:
       - deployment: POJob
@@ -56,7 +56,7 @@ stages:
               steps:
                 - template: deploy/jobs/deploy-uat.yml
   - stage: PROD
-    displayName: PROD Stage
+    displayName: BO Stage
     condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
     jobs:
       - deployment: BOJob
