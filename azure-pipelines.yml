@@ -5,8 +5,8 @@
 # q3equfz4igv6fajlod2lphysuklcj2erkznyousr7xjndgyc6yza
 trigger:
   - main
-  - sit
-  - uat
+  - release/sit
+  - release/uat
   - develop
 
 variables:
@@ -32,7 +32,7 @@ stages:
 
   - stage: SIT
       displayName: SIT Stage
-      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/sit'))
+      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/sit'))
       jobs:
         - deployment: SITJob
           pool:
@@ -48,7 +48,7 @@ stages:
 
   - stage: UAT
       displayName: UAT Stage
-      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/uat'))
+      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/uat'))
       jobs:
         - deployment: UATJob
           pool:
