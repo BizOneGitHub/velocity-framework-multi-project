@@ -24,6 +24,6 @@ steps:
   - script: sbt clean
     displayName: 'Running $ sbt clean'
   - script: sbt transformation/coverage transformation/test transformation/coverageReport transformation/coverageOff
-      displayName: 'Running $ sbt coverage test coverageReport coverageOff'
+    displayName: 'Running $ sbt coverage test coverageReport coverageOff'
   - script: sbt transformation/assembly transformation/publish
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
