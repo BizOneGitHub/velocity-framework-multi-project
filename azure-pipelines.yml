@@ -33,7 +33,7 @@ stages:
     displayName: SIT Stage
     condition: eq(variables['build.sourceBranch'], 'refs/heads/release/sit')
     jobs:
-      - deployment: QCJob
+      - deployment: SITJob
         pool:
           vmImage: $(vmImage)
         environment: UT
@@ -46,7 +46,7 @@ stages:
     displayName: UAT Stage
     condition: eq(variables['build.sourceBranch'], 'refs/heads/release/uat')
     jobs:
-      - deployment: POJob
+      - deployment: UATJob
         pool:
           vmImage: $(vmImage)
         environment: UAT
@@ -59,7 +59,7 @@ stages:
     displayName: PROD Stage
     condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
     jobs:
-      - deployment: BOJob
+      - deployment: PRODJob
         pool:
           vmImage: $(vmImage)
         variables:
