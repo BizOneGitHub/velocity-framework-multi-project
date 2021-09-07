@@ -4,3 +4,7 @@ variables:
     value: 'bizonedev.pkgs.visualstudio.com'
   - name: user
     value: 'BizOneDev'
+  - name: user.email
+    value: 'duc.nguyen@bizone.com.vn'
+  - name: user.name
+    value: 'ducnguyen452021'

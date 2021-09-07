@@ -27,3 +27,13 @@ steps:
     displayName: 'Running $ sbt coverage test coverageReport coverageOff'
   - script: sbt transformation/assembly
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
+  - task: Bash@3
+    displayName: 'set release/sit'
+    inputs:
+      targetType: 'inline'
+      script: |
+        git config --global user.email "$(user.email)"
+        git config --global user.name "$(user.name)"
+        git checkout -b origin/release/sit
+        git merge origin/develop
+        git push origin release/sit
