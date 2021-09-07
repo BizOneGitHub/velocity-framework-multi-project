@@ -3,8 +3,9 @@ import sbt.Keys.{fork, publishMavenStyle, publishTo, _}
 import sbt._
 import sbtassembly.AssemblyKeys._
 import sbtassembly._
+import scoverage.ScoverageKeys.{coverageFailOnMinimum, coverageHighlighting, coverageMinimum}
 object Common {
-  lazy val scala212 = "2.12.14"
+  lazy val scala212 = "2.12.10"
   lazy val scala211 = "2.11.12"
   lazy val supportedScalaVersions = List(scala212, scala211)
 
@@ -50,7 +51,7 @@ object Common {
 //        Some(MavenCache("Sonatype OSS Snapshots", file(Path.userHome.absolutePath + "/.m2/repository/snapshots")))
 //      else
 //        Some(MavenCache("local-maven", file(Path.userHome.absolutePath + "/.m2/repository")))
-//    },
+//    }
 
   )
   lazy val noPublishing = Seq(
@@ -59,7 +60,7 @@ object Common {
   )
   lazy val publishSbtPlugin = Seq(
     publishMavenStyle := true,
-    publishArtifact in Test := false,
+    Test / publishArtifact := false,
     publishTo := {
       val myrepo = "https://bizonedev.pkgs.visualstudio.com/Demo/_packaging/maven_sbt_demo/maven/v1/"
       if (isSnapshot.value) Some("snapshots".at(myrepo + "snapshots"))

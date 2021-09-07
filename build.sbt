@@ -43,3 +43,10 @@ releaseProcess := Seq[ReleaseStep](
 )
 
 autoCompilerPlugins := true
+
+
+coverageMinimum := 50
+
+coverageFailOnMinimum := true
+
+coverageHighlighting := true

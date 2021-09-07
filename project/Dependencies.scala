@@ -1,3 +1,4 @@
+import Common.scala212
 import sbt._
 
 object Dependencies {

@@ -23,7 +23,7 @@ steps:
       Add-Content  $HOME/.sbt/.credentials "`npassword=$(artifacts-pw)"
   - script: sbt clean
     displayName: 'Running $ sbt clean'
-  - script: sbt transformation/coverage transformation/test transformation/coverageReport transformation/coverageOff
+  - script: sbt coverage test coverageReport coverageOff
     displayName: 'Running $ sbt coverage test coverageReport coverageOff'
   - script: sbt transformation/assembly
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'

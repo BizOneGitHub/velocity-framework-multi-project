@@ -8,5 +8,5 @@ steps:
     persistCredentials: true
   - script: sbt clean
     displayName: 'Running $ sbt clean'
-  - script: sbt framework-test/coverage framework-test/test framework-test/coverageReport framework-test/coverageOff
+  - script: sbt coverage test coverageReport coverageOff
     displayName: 'Running framework-test $ sbt coverage test coverageReport coverageOff'
