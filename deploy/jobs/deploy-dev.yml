@@ -36,4 +36,4 @@ steps:
         git config --global user.name "$(user.name)"
         git checkout -b release/sit origin/release/sit
         git merge origin/develop
-        git push origin head
+        git push origin release/sit
