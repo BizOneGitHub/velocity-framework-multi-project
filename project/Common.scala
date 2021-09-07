@@ -46,18 +46,8 @@ object Common {
     scalacOptions ++= compilerOptions,
     fork := true,
     javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
-//    publishTo := {
-//      if (isSnapshot.value)
-//        Some(MavenCache("Sonatype OSS Snapshots", file(Path.userHome.absolutePath + "/.m2/repository/snapshots")))
-//      else
-//        Some(MavenCache("local-maven", file(Path.userHome.absolutePath + "/.m2/repository")))
-//    }
+  )
 
-  )
-  lazy val noPublishing = Seq(
-    publish := (),
-    publishLocal := ()
-  )
   lazy val publishSbtPlugin = Seq(
     publishMavenStyle := true,
     Test / publishArtifact := false,
