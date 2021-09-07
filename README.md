@@ -39,3 +39,4 @@ You can run a task in another project by explicitly specifying the project ID, s
 - `sbt connection/assembly connection/publish`
 ### Build All Project
 - `sbt assembly publish`
+- `sbt coverage test coverageReport coverageOff`
