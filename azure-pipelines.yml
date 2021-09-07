@@ -31,6 +31,7 @@ stages:
                 - template: deploy/jobs/deploy-dev.yml
   - stage: SIT
     displayName: SIT Stage
+    dependsOn: DEV
     condition: and(succeeded('DEV'),eq(variables['build.sourceBranch'], 'refs/heads/release/sit'))
     jobs:
       - deployment: SITJob
