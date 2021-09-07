@@ -17,7 +17,6 @@ steps:
       script: |
         git config --global user.email "$(user.email)"
         git config --global user.name "$(user.name)"
-        git checkout -b release/uat origin/release/uat
-        git push origin release/uat
-  - script: sbt "release release-version $(release_version) with-defaults"
-    displayName: 'Running $ sbt "release release-version $(release_version) with-defaults"'
+        git checkout -b main origin/main
+        git merge origin/release/uat
+        git push origin main
