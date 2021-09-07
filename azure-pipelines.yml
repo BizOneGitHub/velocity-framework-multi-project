@@ -28,4 +28,4 @@ stages:
           runOnce:
             deploy:
               steps:
-                - template: deploy/job/deploy-prod.yml
+                - template: deploy/jobs/deploy-prod.yml
