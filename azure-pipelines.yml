@@ -23,7 +23,6 @@ stages:
           vmImage: $(vmImage)
         variables:
           - template: deploy/variables/var-prod.yml
-        environment: DEV
         strategy:
           runOnce:
             deploy:
