@@ -18,5 +18,5 @@ steps:
         git config --global user.email "$(user.email)"
         git config --global user.name "$(user.name)"
         git checkout -b release/uat origin/release/uat
-        git merge origin/release/uat
+        git merge origin/release/sit
         git push origin release/uat
