@@ -25,5 +25,5 @@ steps:
     displayName: 'Running $ sbt clean'
   - script: sbt coverage test coverageReport coverageOff
     displayName: 'Running framework-test $ sbt coverage test coverageReport coverageOff'
-  - script: sbt transformation/assembly transformation/publish
+  - script: sbt transformation/assembly
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
