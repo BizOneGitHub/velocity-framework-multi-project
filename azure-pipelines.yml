@@ -30,43 +30,43 @@ stages:
               steps:
                 - template: deploy/jobs/deploy-dev.yml
   - stage: SIT
-      displayName: SIT Stage
-      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/sit'))
-      jobs:
-        - deployment: SITJob
-          pool:
-            vmImage: $(vmImage)
-          environment: UT
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - template: deploy/jobs/deploy-sit.yml
+    displayName: SIT Stage
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/sit'))
+    jobs:
+      - deployment: SITJob
+        pool:
+          vmImage: $(vmImage)
+        environment: UT
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/jobs/deploy-sit.yml
   - stage: UAT
-      displayName: UAT Stage
-      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/uat'))
-      jobs:
-        - deployment: UATJob
-          pool:
-            vmImage: $(vmImage)
-          environment: UAT
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - template: deploy/jobs/deploy-uat.yml
+    displayName: UAT Stage
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/uat'))
+    jobs:
+      - deployment: UATJob
+        pool:
+          vmImage: $(vmImage)
+        environment: UAT
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/jobs/deploy-uat.yml
   - stage: PROD
-      displayName: PROD Stage
-      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
-      jobs:
-        - deployment: PRODJob
-          pool:
-            vmImage: $(vmImage)
-          variables:
-            - template: deploy/variables/var-prod.yml
-          environment: PROD
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - template: deploy/jobs/deploy-prod.yml
+    displayName: PROD Stage
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: PRODJob
+        pool:
+          vmImage: $(vmImage)
+        variables:
+          - template: deploy/variables/var-prod.yml
+        environment: PROD
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/jobs/deploy-prod.yml
