@@ -1,0 +1,12 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+steps:
+  - checkout: self
+    persistCredentials: true
+  - script: sbt clean
+    displayName: 'Running $ sbt clean'
+  - script: sbt framework-test/coverage framework-test/test framework-test/coverageReport framework-test/coverageOff
+    displayName: 'Running framework-test $ sbt coverage test coverageReport coverageOff'

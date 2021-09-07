@@ -14,11 +14,11 @@ variables:
     value: 'ubuntu-latest'
 
 stages:
-  - stage: SIT
-    displayName: SIT Stage
+  - stage: DEV
+    displayName: DEV Stage
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/develop'))
     jobs:
-      - deployment: SITJob
+      - deployment: DEVJob
         pool:
           vmImage: $(vmImage)
         variables:
@@ -28,4 +28,51 @@ stages:
           runOnce:
             deploy:
               steps:
-                - template: deploy/jobs/deploy-prod.yml
+                - template: deploy/jobs/deploy-dev.yml
+
+  - stage: SIT
+      displayName: SIT Stage
+      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/sit'))
+      jobs:
+        - deployment: SITJob
+          pool:
+            vmImage: $(vmImage)
+          variables:
+            - template: deploy/variables/var-prod.yml
+          environment: UT
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - template: deploy/jobs/deploy-sit.yml
+
+  - stage: UAT
+      displayName: UAT Stage
+      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/uat'))
+      jobs:
+        - deployment: UATJob
+          pool:
+            vmImage: $(vmImage)
+          variables:
+            - template: deploy/variables/var-prod.yml
+          environment: UAT
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - template: deploy/jobs/deploy-uat.yml
+  - stage: PROD
+      displayName: PROD Stage
+      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/prod'))
+      jobs:
+        - deployment: PRODJob
+          pool:
+            vmImage: $(vmImage)
+          variables:
+            - template: deploy/variables/var-prod.yml
+          environment: PROD
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - template: deploy/jobs/deploy-prod.yml
