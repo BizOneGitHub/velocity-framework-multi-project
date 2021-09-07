@@ -24,6 +24,10 @@ lazy val vfframeworktest = projectModule("framework-test")
   .disablePlugins(AssemblyPlugin)
   .dependsOn(vftransformation)
 
+
+
+releaseIgnoreUntrackedFiles := true
+
 autoCompilerPlugins := true
 
 

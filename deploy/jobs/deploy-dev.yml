@@ -28,7 +28,7 @@ steps:
   - script: sbt transformation/assembly
     displayName: 'Run $ sbt tran transformation/assembly transformation/publish'
   - task: Bash@3
-    displayName: 'set release/sit'
+    displayName: 'Release source for release/sit'
     inputs:
       targetType: 'inline'
       script: |
