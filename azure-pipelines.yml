@@ -45,7 +45,6 @@ stages:
               deploy:
                 steps:
                   - template: deploy/jobs/deploy-sit.yml
-
   - stage: UAT
       displayName: UAT Stage
       condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/uat'))
@@ -63,7 +62,7 @@ stages:
                   - template: deploy/jobs/deploy-uat.yml
   - stage: PROD
       displayName: PROD Stage
-      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/prod'))
+      condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
       jobs:
         - deployment: PRODJob
           pool:
