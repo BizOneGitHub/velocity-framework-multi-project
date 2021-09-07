@@ -37,6 +37,8 @@ stages:
         pool:
           vmImage: $(vmImage)
         environment: UT
+        variables:
+          - template: deploy/variables/var-prod.yml
         strategy:
           runOnce:
             deploy:
@@ -50,6 +52,8 @@ stages:
         pool:
           vmImage: $(vmImage)
         environment: UAT
+        variables:
+          - template: deploy/variables/var-prod.yml
         strategy:
           runOnce:
             deploy:

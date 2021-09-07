@@ -4,7 +4,11 @@ variables:
     value: 'bizonedev.pkgs.visualstudio.com'
   - name: user
     value: 'BizOneDev'
+#github account
   - name: user.email
     value: 'duc.nguyen@bizone.com.vn'
   - name: user.name
     value: 'ducnguyen452021'
+#version release
+  - name: release_version
+    value: '1.0.0'
