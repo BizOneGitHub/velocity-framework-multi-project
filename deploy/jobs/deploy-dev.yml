@@ -34,6 +34,6 @@ steps:
       script: |
         git config --global user.email "$(user.email)"
         git config --global user.name "$(user.name)"
-        git checkout -b origin/release/sit
+        git checkout -b release/sit origin/release/sit
         git merge origin/develop
-        git push origin release/sit
+        git push origin head
