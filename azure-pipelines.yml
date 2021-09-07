@@ -16,7 +16,7 @@ variables:
 stages:
   - stage: DEV
     displayName: DEV Stage
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
       - deployment: DEVJob
         pool:
@@ -31,7 +31,7 @@ stages:
                 - template: deploy/jobs/deploy-dev.yml
   - stage: SIT
     displayName: SIT Stage
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/sit'))
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/release/sit')
     jobs:
       - deployment: SITJob
         pool:
@@ -44,7 +44,7 @@ stages:
                 - template: deploy/jobs/deploy-sit.yml
   - stage: UAT
     displayName: UAT Stage
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release/uat'))
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/release/uat')
     jobs:
       - deployment: UATJob
         pool:
@@ -57,7 +57,7 @@ stages:
                 - template: deploy/jobs/deploy-uat.yml
   - stage: PROD
     displayName: PROD Stage
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
     jobs:
       - deployment: PRODJob
         pool:
