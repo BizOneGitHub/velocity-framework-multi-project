@@ -14,10 +14,11 @@ variables:
     value: 'ubuntu-latest'
 
 stages:
-  - stage: Validate
-    displayName: Release Stage
+  - stage: SIT
+    displayName: SIT Stage
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/develop'))
     jobs:
-      - deployment: ValidateJob
+      - deployment: SITJob
         pool:
           vmImage: $(vmImage)
         variables:
