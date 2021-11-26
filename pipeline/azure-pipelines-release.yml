@@ -1,0 +1,76 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+# q3equfz4igv6fajlod2lphysuklcj2erkznyousr7xjndgyc6yza
+trigger:
+  - main
+  - release/sit
+  - release/uat
+  - develop
+
+variables:
+  - name: vmImage
+    value: 'ubuntu-latest'
+
+stages:
+  - stage: DEV
+    displayName: DEV Stage
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
+    jobs:
+      - deployment: DEVJob
+        pool:
+          vmImage: $(vmImage)
+        variables:
+          - template: deploy/variables/var-prod.yml
+        environment: DEV
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/jobs/deploy-dev.yml
+  - stage: SIT
+    displayName: SIT Stage
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/release/sit')
+    jobs:
+      - deployment: SITJob
+        pool:
+          vmImage: $(vmImage)
+        environment: UT
+        variables:
+          - template: deploy/variables/var-prod.yml
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/jobs/deploy-sit.yml
+  - stage: UAT
+    displayName: UAT Stage
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/release/uat')
+    jobs:
+      - deployment: UATJob
+        pool:
+          vmImage: $(vmImage)
+        environment: UAT
+        variables:
+          - template: deploy/variables/var-prod.yml
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/jobs/deploy-uat.yml
+  - stage: PROD
+    displayName: PROD Stage
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
+    jobs:
+      - deployment: PRODJob
+        pool:
+          vmImage: $(vmImage)
+        variables:
+          - template: deploy/variables/var-prod.yml
+        environment: PROD
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: deploy/jobs/deploy-prod.yml
